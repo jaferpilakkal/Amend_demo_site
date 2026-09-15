@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.sites-runtime/
+.agents/
+.claude/
+.codex/
+.cursor/
+.impeccable/review/
+test-results/
+*.zip
