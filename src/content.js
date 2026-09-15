@@ -2,9 +2,9 @@
 export const clinic = {
   bookingUrl: '[BOOKING_URL]',
   bookingEmail: '[BOOKING_EMAIL]',
-  whatsappUrl: '[WHATSAPP_URL]',
+  whatsappUrl: 'https://wa.me/910000000000?text=Hello%20Amend%20Dental%20Clinic%2C%20I%27d%20like%20to%20book%20a%20consultation.',
   phone: '+91 00000 00000',
-  email: 'hello@amend-demo.example',
+  email: 'hello@amenddental.in',
   siteUrl: '[SITE_URL]',
 };
 
@@ -20,12 +20,12 @@ export const treatments = [
 ];
 
 export const faqs = [
-  ['Do I need an appointment before visiting?', 'For this demo, appointments are recommended so the team can prepare for your visit. Confirm the clinic’s final walk-in policy before launch.'],
-  ['Can I book a consultation through WhatsApp?', 'The demo includes a WhatsApp route for quick enquiries. Connect the clinic’s verified number before launch.'],
-  ['What should I bring to my first appointment?', 'A typical first visit may benefit from relevant dental records, current prescriptions, and identification. Replace this with the clinic’s confirmed guidance.'],
+  ['Do I need an appointment before visiting?', 'Appointments are recommended so the team can prepare for your visit and guide you with enough time.'],
+  ['Can I book a consultation through WhatsApp?', 'Yes. You can use WhatsApp for quick enquiries and consultation requests.'],
+  ['What should I bring to my first appointment?', 'A typical first visit may benefit from relevant dental records, current prescriptions, and identification.'],
   ['How do I know which treatment I need?', 'Begin with a consultation. A dentist can listen to your concerns, assess your oral health, and discuss suitable next steps.'],
-  ['Do you treat dental emergencies?', 'Emergency availability varies. This demo directs urgent enquiries to the clinic, and the consultation form is not an emergency service.'],
-  ['Are payment options available?', 'Costs and payment options depend on the treatment plan. Add the clinic’s confirmed payment policy here before launch.'],
-  ['Do you offer treatments for children?', 'This demo presents pediatric dentistry as a proposed service. Confirm available age ranges and services before launch.'],
+  ['Do you treat dental emergencies?', 'Emergency availability varies. Please contact the clinic directly for urgent enquiries.'],
+  ['Are payment options available?', 'Costs and payment options depend on the treatment plan. The team can walk you through details during consultation.'],
+  ['Do you offer treatments for children?', 'Yes. Pediatric dentistry focuses on gentle dental experiences that help children build positive habits.'],
   ['Can I get a second opinion?', 'A second-opinion consultation can review your concerns and available records. Confirm the clinic’s process before publishing.'],
 ];

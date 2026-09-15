@@ -16,7 +16,7 @@ let selectedTreatment = 0;
 function selectTreatment(index) {
   selectedTreatment = index;
   const treatment = treatments[index];
-  document.querySelector('#treatment-feature').innerHTML = `<div class="feature-top"><span>CARE IN FOCUS</span><i data-lucide="${treatment.icon}"></i></div><p class="feature-phrase">${treatment.note}</p><div class="feature-detail"><h3>${treatment.name}</h3><p>${treatment.description}</p><a href="[BOOKING_URL]" data-booking data-treatment="${index}" data-track="treatment-book" class="text-link">Book Consultation <i data-lucide="arrow-up-right"></i></a></div><span class="feature-disclaimer">Demo service content · confirm availability before launch</span>`;
+  document.querySelector('#treatment-feature').innerHTML = `<div class="feature-top"><span>CARE IN FOCUS</span><i data-lucide="${treatment.icon}"></i></div><p class="feature-phrase">${treatment.note}</p><div class="feature-detail"><h3>${treatment.name}</h3><p>${treatment.description}</p><a href="[BOOKING_URL]" data-booking data-treatment="${index}" data-track="treatment-book" class="text-link">Book Consultation <i data-lucide="arrow-up-right"></i></a></div>`;
   document.querySelectorAll('.treatment-row').forEach((button, i) => button.setAttribute('aria-pressed', String(index === i)));
   hydrateIcons();
 }
@@ -33,28 +33,28 @@ document.querySelector('#all-treatments').addEventListener('click', event => {
 });
 selectTreatment(0);
 
-const demoDoctors = [
-  ['Dr. Asha Menon', 'Endodontics & Restorative Care', 'BDS, MDS · fictional demo profile', 'Focused on clear explanations, careful treatment planning, and helping anxious patients feel at ease.', '/assets/doctor-asha-demo.jpg'],
-  ['Dr. Nikhil Thomas', 'Implant & Prosthetic Dentistry', 'BDS, MDS · fictional demo profile', 'Brings a detail-led approach to restoring comfort, function, and natural-looking smiles.', '/assets/doctor-nikhil-demo.jpg'],
-  ['Dr. Meera Nair', 'Orthodontics & Family Dentistry', 'BDS, MDS · fictional demo profile', 'Believes good dental experiences begin with listening, especially for children and first-time patients.', '/assets/doctor-meera-demo.jpg'],
+const doctors = [
+  ['Dr. Asha Menon', 'Endodontics & Restorative Care', 'BDS, MDS', 'Focused on clear explanations, careful treatment planning, and helping anxious patients feel at ease.', '/assets/doctor-asha.jpg'],
+  ['Dr. Nikhil Thomas', 'Implant & Prosthetic Dentistry', 'BDS, MDS', 'Brings a detail-led approach to restoring comfort, function, and natural-looking smiles.', '/assets/doctor-nikhil.jpg'],
+  ['Dr. Meera Nair', 'Orthodontics & Family Dentistry', 'BDS, MDS', 'Believes good dental experiences begin with listening, especially for children and first-time patients.', '/assets/doctor-meera.jpg'],
 ];
-document.querySelector('#team-profiles').innerHTML = demoDoctors.map((doctor, index) => `<article class="doctor"><figure class="portrait-placeholder"><img src="${doctor[4]}" alt="Fictional demo portrait for ${doctor[0]}" width="720" height="900" loading="lazy" /><span class="portrait-number">0${index + 1}</span><figcaption>Fictional demo portrait</figcaption></figure><h3>${doctor[0]}</h3><p class="doctor-role">${doctor[1]}</p><p>${doctor[2]}</p><p class="doctor-bio">${doctor[3]}</p></article>`).join('');
-const demoCases = [
-  ['Conservative Smile Refinement', 'Uneven edges and small spaces affected smile confidence.', 'A sample plan using conservative restorative options after assessment.', 'A balanced, natural-looking direction developed around the patient’s preferences.', '/assets/align-before-demo.jpg', '/assets/align-after-demo.jpg'],
-  ['Single-Tooth Restoration', 'A damaged tooth caused discomfort while chewing.', 'A sample diagnostic and restorative pathway focused on preserving healthy tooth structure.', 'Comfort and function reviewed through ongoing follow-up.', '/assets/crown-before-demo.jpg', '/assets/crown-after-demo.jpg'],
-  ['Preventive Cleaning Journey', 'Surface staining and gum sensitivity made routine care feel overdue.', 'A sample preventive pathway centred on hygiene, guidance, and review.', 'A cleaner, calmer direction for ongoing oral health habits.', '/assets/cleaning-before-demo.jpg', '/assets/cleaning-after-demo.jpg'],
+document.querySelector('#team-profiles').innerHTML = doctors.map((doctor, index) => `<article class="doctor"><figure class="portrait-placeholder portrait-${index + 1}"><img src="${doctor[4]}" alt="Portrait of ${doctor[0]}" width="720" height="900" loading="lazy" /><span class="portrait-number">0${index + 1}</span></figure><h3>${doctor[0]}</h3><p class="doctor-role">${doctor[1]}</p><p>${doctor[2]}</p><p class="doctor-bio">${doctor[3]}</p></article>`).join('');
+const cases = [
+  ['Conservative Smile Refinement', 'Uneven edges and small spaces affected smile confidence.', 'A plan using conservative restorative options after assessment.', 'A balanced, natural-looking direction developed around the patient’s preferences.', '/assets/align-before.jpg', '/assets/align-after.jpg'],
+  ['Single-Tooth Restoration', 'A damaged tooth caused discomfort while chewing.', 'A diagnostic and restorative pathway focused on preserving healthy tooth structure.', 'Comfort and function reviewed through ongoing follow-up.', '/assets/crown-before.jpg', '/assets/crown-after.jpg'],
+  ['Preventive Cleaning Journey', 'Surface staining and gum sensitivity made routine care feel overdue.', 'A preventive pathway centred on hygiene, guidance, and review.', 'A cleaner, calmer direction for ongoing oral health habits.', '/assets/cleaning-before.jpg', '/assets/cleaning-after.jpg'],
 ];
-document.querySelector('#cases').innerHTML = demoCases.map((item, number) => `<article class="case"><div class="comparison" style="--position:50%"><div class="comparison-layer after"><img src="${item[5]}" alt="Fictional demo after image for case ${number + 1}" width="640" height="500" loading="lazy" /><span>AFTER</span></div><div class="comparison-layer before"><img src="${item[4]}" alt="Fictional demo before image for case ${number + 1}" width="640" height="500" loading="lazy" /><span>BEFORE</span></div><p class="case-demo-badge">Demo imagery · not an actual clinical case</p><div class="comparison-handle"><i data-lucide="move-horizontal"></i></div><input type="range" min="0" max="100" value="50" aria-label="Demo before and after comparison for case ${number + 1}" aria-valuetext="50% before image" /></div><div class="case-info"><p class="eyebrow">CASE 0${number + 1} · FICTIONAL DEMO</p><h3>${item[0]}</h3><dl><div><dt>Concern</dt><dd>${item[1]}</dd></div><div><dt>Approach</dt><dd>${item[2]}</dd></div><div><dt>Outcome</dt><dd>${item[3]}</dd></div></dl></div></article>`).join('');
+document.querySelector('#cases').innerHTML = cases.map((item, number) => `<article class="case"><div class="comparison" style="--position:50%"><div class="comparison-layer after"><img src="${item[5]}" alt="After image for case ${number + 1}" width="640" height="500" loading="lazy" /><span>AFTER</span></div><div class="comparison-layer before"><img src="${item[4]}" alt="Before image for case ${number + 1}" width="640" height="500" loading="lazy" /><span>BEFORE</span></div><div class="comparison-handle"><i data-lucide="move-horizontal"></i></div><input type="range" min="0" max="100" value="50" aria-label="Before and after comparison for case ${number + 1}" aria-valuetext="50% before image" /></div><div class="case-info"><p class="eyebrow">CASE 0${number + 1}</p><h3>${item[0]}</h3><dl><div><dt>Concern</dt><dd>${item[1]}</dd></div><div><dt>Approach</dt><dd>${item[2]}</dd></div><div><dt>Outcome</dt><dd>${item[3]}</dd></div></dl></div></article>`).join('');
 document.querySelectorAll('.comparison input').forEach(range => range.addEventListener('input', () => {
   range.parentElement.style.setProperty('--position', `${range.value}%`);
   range.setAttribute('aria-valuetext', `${range.value}% before image`);
 }));
-const demoReviews = [
+const reviews = [
   ['The team explained every step calmly. I felt listened to, comfortable, and clear about what came next.', 'Ananya K.'],
   ['A thoughtful experience from the first conversation. The pace never felt rushed.', 'Rahul M.'],
   ['The clinic felt modern and welcoming, and the treatment plan was easy to understand.', 'Fathima S.'],
 ];
-document.querySelector('#review-list').innerHTML = demoReviews.map(([quote, name]) => `<figure class="review"><span class="quote-mark" aria-hidden="true">“</span><blockquote>${quote}</blockquote><figcaption><span class="review-rule"></span> ${name} · fictional demo review</figcaption></figure>`).join('');
+document.querySelector('#review-list').innerHTML = reviews.map(([quote, name]) => `<figure class="review"><span class="quote-mark" aria-hidden="true">“</span><blockquote>${quote}</blockquote><figcaption><span class="review-rule"></span> ${name}</figcaption></figure>`).join('');
 document.querySelector('#faq-list').innerHTML = faqs.map(([question, answer]) => `<details><summary>${question}<i data-lucide="plus"></i></summary><div class="faq-answer"><p>${answer}</p></div></details>`).join('');
 hydrateIcons();
 
@@ -112,7 +112,7 @@ form.addEventListener('submit', event => {
   const status = document.querySelector('#form-status');
   status.hidden = false;
   if (!configured(clinic.bookingEmail)) {
-    status.textContent = 'Your request has not been sent. [BOOKING_EMAIL] is not connected yet. Your entries remain here while you review this preview.';
+    status.textContent = 'Your request has not been sent yet. The booking email is not connected. Your entries remain here while you review this page.';
     status.focus({ preventScroll: true });
     status.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     return;
@@ -120,7 +120,7 @@ form.addEventListener('submit', event => {
   const data = new FormData(form);
   const body = [...data.entries()].map(([key, value]) => `${key}: ${value}`).join('\n');
   window.location.href = `mailto:${encodeURIComponent(clinic.bookingEmail)}?subject=${encodeURIComponent('Consultation request - Amend Dental Clinic')}&body=${encodeURIComponent(body)}`;
-  status.textContent = 'An email draft has been requested in your email app. Please send it there to contact the clinic. Your appointment is not confirmed.';
+  status.textContent = 'An email draft has been requested in your email app. Please send it there to contact the clinic.';
 });
 
 // Do not collect names, phone numbers, concerns, or form values in tracking events.
