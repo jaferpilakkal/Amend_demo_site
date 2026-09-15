@@ -9,9 +9,9 @@ Responsive one-page dental website using Vite, semantic HTML, native CSS, Lucide
 - `src/content.js`: central booking destinations, treatment concepts and FAQs.
 - `index.html`: page copy, contact placeholders, metadata and placeholder Dentist schema.
 - The logo is the original supplied PNG, copied without alteration.
-- The clinic image is a generated architectural concept, explicitly captioned as a placeholder. Replace with approved real clinic photography before launch.
+- The clinic, consultation, doctor portrait and before/after visuals are generated fictional demo assets. Replace with approved real clinic photography and consented clinical imagery before launch.
 - Treatment text and care philosophy are supplied editable concepts, not confirmed clinic claims.
-- Doctors, testimonials, case details, before/after imagery, contacts and policies are marked placeholders. No clinical outcomes or reviews are simulated.
+- Doctors, testimonials, case details, contacts and policies use clearly labelled demo sample data. No clinical outcomes or reviews are presented as verified clinic information.
 - Booking links use `[BOOKING_URL]`; in preview they navigate to the consultation form. Set `clinic.bookingUrl` to enable an external booking service.
 - Until `[BOOKING_EMAIL]` is configured, submitting the form explicitly says nothing was sent. With an email configured, it opens a user-reviewed email draft; this is not a server submission or confirmed appointment.
 - WhatsApp, phone and social placeholders show an honest connection notice. Replace both configuration and visible placeholder text with approved clinic data.
