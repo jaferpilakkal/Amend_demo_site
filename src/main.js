@@ -135,3 +135,79 @@ if (configured(clinic.siteUrl) && safeWebUrl(clinic.siteUrl)) {
     const meta = document.createElement('meta'); meta.setAttribute('property', property); meta.content = content; document.head.append(meta);
   }
 }
+
+/* ===== Hero 3D parallax + particle field (added) ===== */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  const fx = document.querySelector('#hero-fx');
+  if (hero) requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('in')));
+  if (!hero || !fx || reduce) return;
+
+  const layers = [...fx.querySelectorAll('.orb-layer')];
+  let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
+  const apply = () => {
+    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+    layers.forEach(layer => {
+      const d = Number(layer.dataset.depth) || 40;
+      const f = d / 100;
+      layer.style.transform = `translate3d(${cx * f * 46}px,${cy * f * 46}px,0)`;
+    });
+    fx.style.transform = `rotateX(${cy * -5}deg) rotateY(${cx * 6}deg)`;
+    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(apply);
+    else raf = 0;
+  };
+  const onMove = e => {
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    if (!raf) raf = requestAnimationFrame(apply);
+  };
+  hero.addEventListener('pointermove', onMove, { passive: true });
+  hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(apply); });
+
+  // Lightweight particle constellation
+  const canvas = document.querySelector('#hero-particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0, dpr = Math.min(devicePixelRatio || 1, 2), dots = [], pointer = { x: -999, y: -999 };
+  const NAVY = '23,58,115';
+  const resize = () => {
+    const r = hero.getBoundingClientRect();
+    w = r.width; h = r.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.min(52, w / 26));
+    dots = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.8 + 0.8
+    }));
+  };
+  const tick = () => {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of dots) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      const dx = p.x - pointer.x, dy = p.y - pointer.y, dist = Math.hypot(dx, dy);
+      if (dist < 120) { p.x += dx / dist * 1.4; p.y += dy / dist * 1.4; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${NAVY},.5)`; ctx.fill();
+    }
+    for (let i = 0; i < dots.length; i++) for (let j = i + 1; j < dots.length; j++) {
+      const a = dots[i], b = dots[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 118) {
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(${NAVY},${0.16 * (1 - d / 118)})`; ctx.lineWidth = 1; ctx.stroke();
+      }
+    }
+    requestAnimationFrame(tick);
+  };
+  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top; }, { passive: true });
+  hero.addEventListener('pointerleave', () => { pointer.x = -999; pointer.y = -999; });
+  const ro = new ResizeObserver(resize); ro.observe(hero);
+  resize(); tick();
+})();
+
