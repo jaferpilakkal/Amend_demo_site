@@ -9,3 +9,10 @@ dist/
 .impeccable/review/
 test-results/
 *.zip
+.env
+.env.*
+*.env
+credentials.json
+*.pem
+*.key
+.credentials
